@@ -1,6 +1,6 @@
 {
   "name": "alignment",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Naive alignment of a block with variable assignments",
   "main": "dist/alignment.js",
   "typings": "dist/alignment.d.ts",
