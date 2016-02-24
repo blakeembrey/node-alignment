@@ -1,0 +1,13 @@
+{
+  "ambientDependencies": {
+    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#af81415504b4edce8dac8446d96857f8018c6e9f"
+  },
+  "devDependencies": {
+    "blue-tape": "github:typings/typed-blue-tape#a4e41a85d6f760e7c60088127968eae7d3a556fa"
+  },
+  "dependencies": {
+    "escape-string-regexp": "github:typed-typings/npm-escape-string-regexp#d587377ce17cf670f25ef0cdae7ce8d3b433ce46",
+    "repeat-string": "github:typed-typings/npm-repeat-string#17eeaf882e9c0b3822653f74a028909d3fc0c97f",
+    "xtend": "github:typed-typings/npm-xtend#63cccadf3295b3c15561ee45617ac006edcca9e0"
+  }
+}
