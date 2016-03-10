@@ -1,10 +1,10 @@
 import test = require('blue-tape')
-import { block } from './alignment'
+import { blockAlign } from './alignment'
 
 test('alignment', t => {
-  t.test('block', t => {
+  t.test('blockAlign', t => {
     t.test('align block of code', t => {
-      const result = block([
+      const result = blockAlign([
         'left=right',
         'another = more'
       ].join('\n'))
@@ -20,7 +20,7 @@ test('alignment', t => {
     })
 
     t.test('php style variables', t => {
-      const result = block([
+      const result = blockAlign([
         '$a = 1;',
         '$bg = 2;'
       ].join('\n'))
@@ -36,7 +36,7 @@ test('alignment', t => {
     })
 
     t.test('align text using colons', t => {
-      const result = block([
+      const result = blockAlign([
         'left  : right',
         'another   :test',
         'something: else',
@@ -54,7 +54,7 @@ test('alignment', t => {
     })
 
     t.test('align text with colons and equals', t => {
-      const result = block([
+      const result = blockAlign([
         'left  = right',
         'another   :test',
         'something: else'
@@ -72,7 +72,7 @@ test('alignment', t => {
     })
 
     t.test('ignore text in quotes', t => {
-      const result = block([
+      const result = blockAlign([
         '"left:test"  = right',
         '"another ="  :test',
         'something: else'
@@ -90,7 +90,7 @@ test('alignment', t => {
     })
 
     t.test('align multiple signs', t => {
-      const result = block([
+      const result = blockAlign([
         'this = that = test',
         'another = thing = here'
       ].join('\n'))
@@ -106,7 +106,7 @@ test('alignment', t => {
     })
 
     t.test('ignore escaped quotes', t => {
-      const result = block([
+      const result = blockAlign([
         '"test\\" escape": more',
         '\'yet another \\\' escape\' = more'
       ].join('\n'))
@@ -122,7 +122,7 @@ test('alignment', t => {
     })
 
     t.test('align multiple separators', t => {
-      const result = block([
+      const result = blockAlign([
         'test += 1',
         'something -= 1',
         'else /= 1'
@@ -140,7 +140,7 @@ test('alignment', t => {
     })
 
     t.test('ignore lines with no separator', t => {
-      const result = block([
+      const result = blockAlign([
         'something += 1',
         '# comment',
         'again = 5'
@@ -159,7 +159,7 @@ test('alignment', t => {
   })
 
   t.test('ignore escaped opening quotes', t => {
-    const result = block([
+    const result = blockAlign([
       'test\\"something=":else"',
       'something = simple'
     ].join('\n'))
@@ -175,7 +175,7 @@ test('alignment', t => {
   })
 
   t.test('catch escaped esscape characters', t => {
-    const result = block([
+    const result = blockAlign([
       '"test\\\\" :escape":more',
       '\'yet another \\\' escape\' = more'
     ].join('\n'))
@@ -191,7 +191,7 @@ test('alignment', t => {
   })
 
   t.test('ignore double colon', t => {
-    const result = block([
+    const result = blockAlign([
       'App::NAME_KEY => \'text\',',
       'App::FORMAT_KEY => \'123\''
     ].join('\n'))

@@ -16,7 +16,8 @@ export const DEFAULT_OPTIONS: Options = {
   ignoreSeparators: ['::']
 }
 
-export type AlignmentResult = [string, [number, number][]]
+export type BlockResult = [string, [number, number][]]
+export type CursorResult = number[]
 
 /**
  * Check for empty values.
@@ -33,9 +34,35 @@ function sortLength (a: string, b: string) {
 }
 
 /**
+ * Align multiple cursors.
+ */
+export function cursorAlign (lines: string[], cursors: number[]): CursorResult {  
+  let padLen = new Array<number>()
+  
+  // Cursors and lines must match
+  if (lines.length != cursors.length) {
+    return []
+  }
+  
+  // Find max indent position.
+  const maxIndent = Math.max(
+    ...cursors.map(cursor => {
+      return cursor
+    })
+  )
+  
+  // Align each cursor to max indent.
+  cursors.forEach((pos, idx) => {
+    padLen[idx] = maxIndent - pos
+  });
+  
+  return padLen
+}
+
+/**
  * Align a block of code.
  */
-export function block (text: string, options?: Options): AlignmentResult {
+export function blockAlign (text: string, options?: Options): BlockResult {
   const { leftSeparators, rightSeparators, ignoreSeparators, spaceSeparators } = extend(DEFAULT_OPTIONS, options)
 
   const separators = leftSeparators.concat(rightSeparators).concat(ignoreSeparators).filter(isEmpty).sort(sortLength).map(escape)
@@ -54,7 +81,7 @@ export function block (text: string, options?: Options): AlignmentResult {
     '(' + separators.join('|') + ')'
   )
 
-  function alignText (text: string): AlignmentResult {
+  function alignText (text: string): BlockResult {
     const lines = text.split('\n')
     let matches = 0
 
