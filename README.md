@@ -5,7 +5,7 @@
 [![Build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
 
-> **Alignment** does naive alignment of a block with variable assignments.
+> **Alignment** does naive alignment of a block with variable assignments. Also supports multi-cursor alignment.
 
 ## Installation
 
@@ -14,13 +14,12 @@ npm install alignment --save
 ```
 
 ## Usage
-
 Returns a tuple of the result text and cursor positions.
 
 ```js
-import { block } from 'alignment'
+import { blockAlign } from 'alignment'
 
-const result = block(`
+const result: BlockResult = blockAlign(`
 var x = 10;
 var backgroundImage = 'http://example.com';
 `)
@@ -30,6 +29,17 @@ console.log(result)
 //   '\nvar x               = 10;\nvar backgroundImage = \'http://example.com\';\n',
 //   [ [ 1, 20 ], [ 2, 20 ] ]
 // ]
+```
+
+```js
+import { cursorAlign } from 'alignment'
+
+const padLen: CursorResult = cursorAlign(lines, cursors)
+
+lines.forEach((line, idx) => {
+  let pos = cursors[idx]
+  console.log(line.splice(0, pos) + Array(padLen[idx] + 1).join(' ') + line.splice(pos))
+}
 ```
 
 **Caveats:**
