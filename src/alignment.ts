@@ -16,7 +16,8 @@ export const DEFAULT_OPTIONS: Options = {
   ignoreSeparators: ['::']
 }
 
-export type AlignmentResult = [string, [number, number][]]
+export type Cursor = [number, number]
+export type AlignmentResult = [string, Cursor[]]
 
 /**
  * Check for empty values.
@@ -33,7 +34,7 @@ function sortLength (a: string, b: string) {
 }
 
 /**
- * Align a block of code.
+ * Align a block of text, based on separator tokens.
  */
 export function block (text: string, options?: Options): AlignmentResult {
   const { leftSeparators, rightSeparators, ignoreSeparators, spaceSeparators } = extend(DEFAULT_OPTIONS, options)
@@ -154,4 +155,11 @@ export function block (text: string, options?: Options): AlignmentResult {
   }
 
   return alignText(text)
+}
+
+/**
+ * Align text by a range of cursors.
+ */
+export function cursor (text: string, cursors: Cursor[]): AlignmentResult {
+
 }
