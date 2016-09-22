@@ -41,7 +41,7 @@
     "blue-tape": "^1.0.0",
     "istanbul": "^0.4.2",
     "tap-spec": "^4.1.1",
-    "typescript": "^1.7.5",
+    "typescript": "^2.0.3",
     "typings": "^1.3.0"
   },
   "dependencies": {
